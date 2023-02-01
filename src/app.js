@@ -51,4 +51,17 @@ app.put('/teams/:id', (req, res) => {
     res.status(200).json({ updateTeam });
 });
 
+app.delete('/teams/:id', (req, res) => {
+    const { id } = req.params;
+
+    const newArrayTeams = teams.filter((team) => team.id !== Number(id));
+
+    if (!newArrayTeams) {
+        res.status(404).json({ message: 'Team not found' });
+    }
+    
+    // res.status(200).json({ message: newArrayTeams });
+    res.status(200).end();
+});
+
 module.exports = app;
